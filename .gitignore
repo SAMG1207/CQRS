@@ -1,0 +1,40 @@
+﻿################################################################################
+# Este archivo .gitignore ha sido creado automáticamente por Microsoft(R) Visual Studio.
+################################################################################
+
+################################################################################
+# Archivo .gitignore para proyectos .NET en Visual Studio
+################################################################################
+
+# Carpetas de compilación
+bin/
+obj/
+.vs/
+
+# Archivos de usuario y configuración local
+*.user
+*.suo
+*.cache
+*.log
+*.dbmdl
+*.pdb
+
+# Archivos de configuración
+appsettings.Development.json
+appsettings.Production.json
+appsettings.Staging.json
+appsettings.Local.json
+
+# Archivos de entorno
+.env
+
+# Archivos de solución y proyecto que no deben subirse
+*.csproj.user
+*.sln.docstates
+
+# Archivos de pruebas HTTP
+*.http
+
+# Otros
+TestResults/
+node_modules/
