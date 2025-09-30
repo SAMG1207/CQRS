@@ -16,7 +16,8 @@ namespace CQRSMediaTr.Features.Brand.Commands.Updating
         public async Task<Unit> Handle(UpdateBrandCommand request, CancellationToken cancellationToken)
         {
             var brand = await _unitOfWork.BrandRepository.GetAsync(request.Id) ?? throw new BrandNotFoundException(request.Id);
-            if (await _unitOfWork.BrandRepository.GetBrandByName(request.Name))
+            bool brandAlreadyExists = await _unitOfWork.BrandRepository.GetBrandByName(request.Name);
+            if (brandAlreadyExists)
             {
                 throw new BrandAlreadyExistsException(request.Name);
             }

@@ -33,7 +33,7 @@ namespace CQRSMediaTr.Infrastructure.Persistance.Repository.BrandRepository
 
         public Task<bool> GetBrandByName(string name)
         {
-            return _context.Brands.AnyAsync(b => b.Name == name);
+            return _context.Brands.AnyAsync(b => b.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
         }
 
         public async Task UpdateAsync(Brand entity)

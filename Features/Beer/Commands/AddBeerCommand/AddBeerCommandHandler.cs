@@ -14,11 +14,12 @@ namespace CQRSMediaTr.Features.Beer.Commands.Adding
         }
         public async Task<Domain.Beer> Handle(AddBeerCommand request, CancellationToken cancellationToken)
         {
-            if(await _unitOFWork.BeerRepository.GetBeerByNameAndBrandId(request.Name, request.BrandId)){
+            bool beerAlreadyExists = await _unitOFWork.BeerRepository.GetBeerByNameAndBrandId(request.Name, request.BrandId);
+            if (beerAlreadyExists){
                 throw new BeerAlreadyExistsInThisBrandException(request.Name);
             }
             var beer = new Domain.Beer(request.BrandId, request.Name);
-            var brand = await _unitOFWork.BrandRepository.GetAsync(beer.BrandId) ?? throw new BrandNotFoundException(beer.BrandId);
+            _ = await _unitOFWork.BrandRepository.GetAsync(beer.BrandId) ?? throw new BrandNotFoundException(beer.BrandId);
 
             await _unitOFWork.BeerRepository.AddAsync(beer);
             await _unitOFWork.SaveChangesAsync();

@@ -30,7 +30,7 @@ namespace CQRSMediaTr.Infrastructure.Persistance.Repository.BeerRepository
 
         public async Task<bool> GetBeerByNameAndBrandId(string beerName, int brandId)
         {
-            return await _context.Beers.AnyAsync(b => b.Name.ToLower() ==  beerName.ToLower() && b.BrandId == brandId);
+            return await _context.Beers.AnyAsync(b => b.Name.Equals(beerName, StringComparison.OrdinalIgnoreCase) && b.BrandId == brandId);
         }
 
         public async Task UpdateAsync(Beer entity)

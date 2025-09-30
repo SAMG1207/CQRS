@@ -14,7 +14,8 @@ namespace CQRSMediaTr.Features.Brand.Commands.Adding
         }
         public async Task<Domain.Brand> Handle(AddBrandCommand request, CancellationToken cancellationToken)
         {
-            if(await _unitOFWork.BrandRepository.GetBrandByName(request.Name))
+            bool brandAlreadyExists = await _unitOFWork.BrandRepository.GetBrandByName(request.Name);
+            if (brandAlreadyExists)
             {
                 throw new BrandAlreadyExistsException(request.Name);
             }

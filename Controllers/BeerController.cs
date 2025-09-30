@@ -27,21 +27,23 @@ namespace CQRSMediaTr.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateBeer([FromBody] UpdateBeerCommand command)
+        public async Task<IActionResult> UpdateBeer(int id, [FromBody] UpdateBeerCommand command)
         {
-            var Beer = await _mediator.Send(command);
-            return Ok(Beer);
+            command.Id = id;
+            await _mediator.Send(command);
+            return NoContent();
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteBeer([FromBody] DeleteBeerCommand command)
+        public async Task<IActionResult> DeleteBeer(int id)
         {
+            var command = new DeleteBeerCommand { Id = id };
             await _mediator.Send(command);
             return NoContent();
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetBeerById([FromBody] int id)
+        public async Task<IActionResult> GetBeerById(int id)
         {
             var query = new GetBeerByIdQuery { Id = id };
             var result = await _mediator.Send(query);
