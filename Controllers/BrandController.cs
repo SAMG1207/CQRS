@@ -24,7 +24,7 @@ namespace CQRSMediaTr.Controllers
         public async Task<IActionResult> CreateBrand([FromBody] AddBrandCommand command)
         {
             var result = await _mediator.Send(command);
-            return Ok(result);
+            return Ok();
         }
 
         [HttpPut("{id}")]

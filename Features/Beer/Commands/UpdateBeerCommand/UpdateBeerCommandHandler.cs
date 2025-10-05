@@ -23,7 +23,7 @@ namespace CQRSMediaTr.Features.Beer.Commands.Updating
            beer.BrandId = request.BrandId;
            beer.Name = request.Name;
             
-            await _unitOFWork.BeerRepository.UpdateAsync(beer);
+            _unitOFWork.BeerRepository.Update(beer);
             await _unitOFWork.SaveChangesAsync();
             return Unit.Value;
         }

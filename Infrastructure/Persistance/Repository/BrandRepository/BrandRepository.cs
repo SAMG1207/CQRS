@@ -8,15 +8,15 @@ namespace CQRSMediaTr.Infrastructure.Persistance.Repository.BrandRepository
         private readonly AppDbContext _context;
 
         public BrandRepository(AppDbContext context) {  _context = context; }
-        public async Task AddAsync(Brand entity)
+
+        public void Add(Brand entity)
         {
-            await _context.AddAsync(entity);
+            _context.AddAsync(entity);
         }
 
-        public async Task<bool> DeleteAsync(Brand brand)
+        public void Delete(Brand brand)
         {
             _context.Brands.Remove(brand);
-            return true;
         }
 
         public async Task<IEnumerable<Brand>> GetAllAsync()
@@ -36,14 +36,9 @@ namespace CQRSMediaTr.Infrastructure.Persistance.Repository.BrandRepository
             return _context.Brands.AnyAsync(b => b.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
         }
 
-        public async Task UpdateAsync(Brand entity)
+        public void Update(Brand entity)
         {
            _context.Brands.Update(entity);
-        }
-
-        Task IRepository<Brand>.DeleteAsync(Brand entity)
-        {
-            return DeleteAsync(entity);
         }
     }
 }

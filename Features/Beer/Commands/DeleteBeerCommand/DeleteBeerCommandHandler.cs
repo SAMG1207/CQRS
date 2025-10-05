@@ -16,7 +16,7 @@ namespace CQRSMediaTr.Features.Beer.Commands.DeleteBeerCommand
         public async Task<Unit> Handle(DeleteBeerCommand request, CancellationToken cancellationToken)
         {
             var beer = await _unitOfWork.BeerRepository.GetAsync(request.Id) ?? throw new BeerNotFoundException(request.Id);
-            await _unitOfWork.BeerRepository.DeleteAsync(beer);
+            _unitOfWork.BeerRepository.Delete(beer);
             await _unitOfWork.SaveChangesAsync();
             return Unit.Value;
         }

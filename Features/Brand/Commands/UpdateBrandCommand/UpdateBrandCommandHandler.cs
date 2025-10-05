@@ -22,7 +22,7 @@ namespace CQRSMediaTr.Features.Brand.Commands.Updating
                 throw new BrandAlreadyExistsException(request.Name);
             }
             brand.Name = request.Name;
-            await _unitOfWork.BrandRepository.UpdateAsync(brand);
+            _unitOfWork.BrandRepository.Update(brand);
             await _unitOfWork.SaveChangesAsync();
             return Unit.Value;
         }

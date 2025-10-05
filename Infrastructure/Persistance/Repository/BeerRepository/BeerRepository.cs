@@ -8,12 +8,12 @@ namespace CQRSMediaTr.Infrastructure.Persistance.Repository.BeerRepository
         private readonly AppDbContext _context;
 
         public BeerRepository(AppDbContext context) { _context = context; }
-        public async Task AddAsync(Beer entity)
+        public void Add(Beer entity)
         {
-            await _context.AddAsync(entity);
+             _context.Add(entity);
         }
 
-        public async Task DeleteAsync(Beer entity)
+        public void Delete(Beer entity)
         {
             _context.Beers.Remove(entity);
         }
@@ -30,10 +30,11 @@ namespace CQRSMediaTr.Infrastructure.Persistance.Repository.BeerRepository
 
         public async Task<bool> GetBeerByNameAndBrandId(string beerName, int brandId)
         {
-            return await _context.Beers.AnyAsync(b => b.Name.Equals(beerName, StringComparison.OrdinalIgnoreCase) && b.BrandId == brandId);
+            return await _context.Beers
+                .AnyAsync(b => b.Name.Equals(beerName, StringComparison.OrdinalIgnoreCase) && b.BrandId == brandId);
         }
 
-        public async Task UpdateAsync(Beer entity)
+        public void Update(Beer entity)
         {
             _context.Beers.Update(entity);
         }

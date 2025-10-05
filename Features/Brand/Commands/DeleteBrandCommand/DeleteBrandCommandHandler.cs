@@ -16,7 +16,7 @@ namespace CQRSMediaTr.Features.Brand.Commands.DeleteBrandCommand
         public async Task<Unit> Handle(DeleteBrandCommand request, CancellationToken cancellationToken)
         {
             var brand = await _unitOfWork.BrandRepository.GetAsync(request.Id) ?? throw new BrandNotFoundException(request.Id);
-            await _unitOfWork.BrandRepository.DeleteAsync(brand);
+            _unitOfWork.BrandRepository.Delete(brand);
             await _unitOfWork.SaveChangesAsync();
             return Unit.Value;
         }

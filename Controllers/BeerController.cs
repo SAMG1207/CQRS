@@ -23,7 +23,7 @@ namespace CQRSMediaTr.Controllers
         public async Task<IActionResult> CreateBeer([FromBody] AddBeerCommand command)
         {
             var result = await _mediator.Send(command);
-            return Ok(result);
+            return Ok();
         }
 
         [HttpPut("{id}")]

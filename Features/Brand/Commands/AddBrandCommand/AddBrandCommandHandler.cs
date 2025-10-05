@@ -21,7 +21,7 @@ namespace CQRSMediaTr.Features.Brand.Commands.Adding
             }
 
             var brand = new Domain.Brand(request.Name);
-            await _unitOFWork.BrandRepository.AddAsync(brand);
+            _unitOFWork.BrandRepository.Add(brand);
             await _unitOFWork.SaveChangesAsync();
             return brand;
         }
