@@ -33,7 +33,7 @@ namespace CQRSMediaTr.Features.Beer.Queries.GetBeersQuery
             };
             _cache.Set(cacheKey, beers, cacheOptions);
             stopwatch.Stop();
-            Console.WriteLine($"Tiempo de respuesta (desde caché): {stopwatch.ElapsedMilliseconds} ms");
+            Console.WriteLine($"Tiempo de respuesta (desde BD): {stopwatch.ElapsedMilliseconds} ms");
             return beers;
         }
     }

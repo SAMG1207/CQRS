@@ -33,7 +33,7 @@ namespace CQRSMediaTr.Features.Brand.Queries.GetBrandsQuery
             };
             _cache.Set(cacheKey, brands, cachedOptions);
             stopwatch.Stop();
-            Console.WriteLine($"Tiempo de respuesta (desde caché): {stopwatch.ElapsedMilliseconds} ms");
+            Console.WriteLine($"Tiempo de respuesta (desde BD): {stopwatch.ElapsedMilliseconds} ms");
             return brands;
         }
     }
