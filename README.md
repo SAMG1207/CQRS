@@ -13,6 +13,7 @@ Este proyecto implementa el patrón **CQRS (Command Query Responsibility Segrega
 - Separación de comandos y consultas
 - Estructura limpia y escalable
 - Endpoints para crear y consultar entidades
+- Uso de Cache para mejorar tiempos de respuesta. 
 
 ## 🧪 Cómo ejecutar
 1. Clona el repositorio  `https://github.com/SAMG1207/CQRS.git`
