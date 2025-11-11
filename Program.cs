@@ -3,6 +3,7 @@ using CQRSMediaTr.Infrastructure.Persistance;
 using CQRSMediaTr.Infrastructure.Persistance.Repository.BeerRepository;
 using CQRSMediaTr.Infrastructure.Persistance.Repository.BrandRepository;
 using CQRSMediaTr.Infrastructure.Persistance.UnitOfWork;
+using CQRSMediaTr.Seed;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
@@ -10,7 +11,7 @@ using System.Text.Json.Serialization;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseInMemoryDatabase("Database"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
 
 builder.Services.AddScoped<IBrandRepository, BrandRepository>();
 builder.Services.AddScoped<IBeerRepository, BeerRepository>();
@@ -31,18 +32,7 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-
-    if (!context.Brands.Any())
-    {
-        context.Brands.AddRange(
-            new Brand { Id = 1, Name = "Polar" },
-            new Brand { Id = 2, Name = "Mahou" },
-            new Brand { Id = 3, Name = "Alhambra" },
-            new Brand { Id = 4, Name = "Corona" },
-            new Brand { Id = 5, Name = "Heineken" }
-        );
-        context.SaveChanges();
-    }
+    DbSeeder.Seed(context);
 }
 
 if (app.Environment.IsDevelopment())
